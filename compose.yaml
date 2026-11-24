@@ -1,0 +1,47 @@
+name: ml-ders-projesi
+
+services:
+  ml-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ml-ders-projesi:py3.12
+    container_name: ml-ders-projesi-app
+    user: "1000:1000"
+    environment:
+      HOME: /tmp
+      MPLCONFIGDIR: /tmp/matplotlib
+    working_dir: /app
+    volumes:
+      - .:/app
+    networks:
+      - ml-ders-net
+
+  ml-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ml-ders-projesi:py3.12
+    container_name: ml-ders-projesi-ui
+    user: "1000:1000"
+    environment:
+      HOME: /tmp
+      MPLCONFIGDIR: /tmp/matplotlib
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:8501:8501"
+    command:
+      - streamlit
+      - run
+      - src/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+    networks:
+      - ml-ders-net
+
+networks:
+  ml-ders-net:
+    driver: bridge
