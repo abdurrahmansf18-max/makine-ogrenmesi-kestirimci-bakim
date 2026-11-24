@@ -26,7 +26,7 @@
       "family": "Taban Çizgisi",
       "scale_numeric": false,
       "best_params": {},
-      "fit_seconds": 1.598,
+      "fit_seconds": 1.479,
       "cv_train_f1_mean": 0.0,
       "cv_f1_mean": 0.0,
       "cv_f1_std": 0.0,
@@ -58,7 +58,7 @@
         "classifier__C": 10.0,
         "classifier__class_weight": null
       },
-      "fit_seconds": 1.531,
+      "fit_seconds": 1.434,
       "cv_train_f1_mean": 0.3239,
       "cv_f1_mean": 0.3304,
       "cv_f1_std": 0.0546,
@@ -91,7 +91,7 @@
         "classifier__estimator__class_weight": null,
         "classifier__estimator__gamma": 0.2
       },
-      "fit_seconds": 3.071,
+      "fit_seconds": 2.925,
       "cv_train_f1_mean": 0.8246,
       "cv_f1_mean": 0.6725,
       "cv_f1_std": 0.0183,
@@ -125,7 +125,7 @@
         "classifier__max_iter": 150,
         "classifier__max_leaf_nodes": 31
       },
-      "fit_seconds": 1.395,
+      "fit_seconds": 1.329,
       "cv_train_f1_mean": 0.9575,
       "cv_f1_mean": 0.7428,
       "cv_f1_std": 0.0639,
@@ -161,7 +161,7 @@
         ],
         "classifier__learning_rate_init": 0.005
       },
-      "fit_seconds": 4.454,
+      "fit_seconds": 4.29,
       "cv_train_f1_mean": 0.7469,
       "cv_f1_mean": 0.6656,
       "cv_f1_std": 0.0594,
@@ -186,20 +186,20 @@
   ],
   "demo_presets": {
     "normal_sample": {
-      "Type": "L",
-      "Air temperature [K]": 300.5,
-      "Process temperature [K]": 309.8,
-      "Rotational speed [rpm]": 1345.0,
-      "Torque [Nm]": 62.7,
-      "Tool wear [min]": 153.0
+      "Type": "H",
+      "Air temperature [K]": 300.7,
+      "Process temperature [K]": 309.6,
+      "Rotational speed [rpm]": 1925.0,
+      "Torque [Nm]": 20.5,
+      "Tool wear [min]": 9.0
     },
     "failure_sample": {
-      "Type": "L",
-      "Air temperature [K]": 303.7,
-      "Process temperature [K]": 312.1,
-      "Rotational speed [rpm]": 1363.0,
-      "Torque [Nm]": 51.8,
-      "Tool wear [min]": 90.0
+      "Type": "M",
+      "Air temperature [K]": 302.4,
+      "Process temperature [K]": 310.1,
+      "Rotational speed [rpm]": 1379.0,
+      "Torque [Nm]": 48.9,
+      "Tool wear [min]": 107.0
     }
   }
 }

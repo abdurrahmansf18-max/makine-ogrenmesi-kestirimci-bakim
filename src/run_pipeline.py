@@ -31,10 +31,19 @@ from src.models import get_baseline_spec, get_model_specs
 from src.trainer import build_cv_splitter, train_and_tune_model
 
 
-def _build_demo_presets(X_test: pd.DataFrame, y_test: pd.Series) -> dict[str, dict[str, Any]]:
-    """Canli Streamlit demosu icin kilitli test setinden gercek normal ve ariza ornegi secer."""
-    normal_row = X_test[y_test == 0].iloc[0]
-    failure_row = X_test[y_test == 1].iloc[0]
+def _build_demo_presets(
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+    champion_estimator: Any,
+) -> dict[str, dict[str, Any]]:
+    """Canli Streamlit demosu icin kilitli test setinden net normal ve ariza ornekleri secer."""
+    normal_df = X_test[y_test == 0]
+    failure_df = X_test[y_test == 1]
+    normal_probs = champion_estimator.predict_proba(normal_df)[:, 1]
+    failure_probs = champion_estimator.predict_proba(failure_df)[:, 1]
+
+    normal_row = normal_df.iloc[int(normal_probs.argmin())]
+    failure_row = failure_df.iloc[int(failure_probs.argmax())]
 
     def to_clean_dict(row: pd.Series) -> dict[str, Any]:
         return {
@@ -77,6 +86,7 @@ def run_full_pipeline(
     # Asama 4 & 5: Taban cizgisi + 4 bagimsiz Pipeline egitimi ve testi
     all_specs = [get_baseline_spec(), *get_model_specs()]
     eval_results: list[dict[str, Any]] = []
+    trained_pipelines: dict[str, Any] = {}
 
     for spec in all_specs:
         trained = train_and_tune_model(
@@ -90,6 +100,7 @@ def run_full_pipeline(
         eval_results.append(evaluation)
 
         if spec.key != "dummy_baseline":
+            trained_pipelines[spec.key] = trained.best_estimator
             joblib.dump(trained.best_estimator, models_dir / f"{spec.key}.joblib")
 
     champion_key = select_champion(eval_results)
@@ -114,7 +125,9 @@ def run_full_pipeline(
         "champion_key": champion_key,
         "champion_selection_rule": "5-katli StratifiedKFold CV F1-Score ortalamasi en yuksek aday",
         "models": serializable_models,
-        "demo_presets": _build_demo_presets(X_test, y_test),
+        "demo_presets": _build_demo_presets(
+            X_test, y_test, trained_pipelines[champion_key]
+        ),
     }
 
     with metrics_path.open("w", encoding="utf-8") as f:
