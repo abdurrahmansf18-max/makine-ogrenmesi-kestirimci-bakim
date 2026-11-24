@@ -1,0 +1,79 @@
+{
+  "rows": 10000,
+  "columns": 14,
+  "missing_values_total": 0,
+  "duplicate_rows": 0,
+  "input_features": [
+    "Type",
+    "Air temperature [K]",
+    "Process temperature [K]",
+    "Rotational speed [rpm]",
+    "Torque [Nm]",
+    "Tool wear [min]"
+  ],
+  "dropped_columns": [
+    "UDI",
+    "Product ID",
+    "TWF",
+    "HDF",
+    "PWF",
+    "OSF",
+    "RNF"
+  ],
+  "target_column": "Machine failure",
+  "class_distribution": {
+    "normal_0": 9661,
+    "failure_1": 339,
+    "failure_rate_pct": 3.39
+  },
+  "type_distribution": {
+    "L": 6000,
+    "M": 2997,
+    "H": 1003
+  },
+  "failure_modes": {
+    "TWF": 46,
+    "HDF": 115,
+    "PWF": 95,
+    "OSF": 98,
+    "RNF": 19
+  },
+  "failure_mode_with_zero_target_rows": 18,
+  "numeric_stats": {
+    "Air temperature [K]": {
+      "min": 295.3,
+      "mean": 300.005,
+      "std": 2.0,
+      "median": 300.1,
+      "max": 304.5
+    },
+    "Process temperature [K]": {
+      "min": 305.7,
+      "mean": 310.006,
+      "std": 1.484,
+      "median": 310.1,
+      "max": 313.8
+    },
+    "Rotational speed [rpm]": {
+      "min": 1168.0,
+      "mean": 1538.776,
+      "std": 179.284,
+      "median": 1503.0,
+      "max": 2886.0
+    },
+    "Torque [Nm]": {
+      "min": 3.8,
+      "mean": 39.987,
+      "std": 9.969,
+      "median": 40.1,
+      "max": 76.6
+    },
+    "Tool wear [min]": {
+      "min": 0.0,
+      "mean": 107.951,
+      "std": 63.654,
+      "median": 108.0,
+      "max": 253.0
+    }
+  }
+}
