@@ -12,7 +12,7 @@
 ## Klasör Yapısı
 
 ```text
-ml_proje/
+makine-ogrenmesi-kestirimci-bakim/
 ├── Dockerfile                # Python 3.12-slim görüntü tanımı
 ├── compose.yaml              # ml-app (CLI/test) ve ml-ui (Streamlit :8501) servisleri
 ├── requirements.txt          # Sabitlenmiş bağımlılık sürümleri
@@ -41,23 +41,28 @@ ml_proje/
 │   ├── test_pipeline_e2e.py  # Uçtan uca pipeline, şampiyon ve .joblib testleri
 │   └── test_app_helpers.py   # Arayüz yardımcıları ve Streamlit AppTest doğrulaması
 └── docs/
-    ├── proje-degerlendirme-raporu.pdf # Ekip değerlendirme raporu
+    ├── proje-degerlendirme-raporu.pdf # Kodlama öncesi ekip değerlendirme raporu
+    ├── sunum-ve-arayuz-rehberi.pdf    # Maks. 15 dk canlı arayüz sunum ve ekip rehberi
     ├── mimari-c4.md                   # C4 mimari diyagramları (C1-C4)
     └── dogrulama-kanitlari.md         # Issue #1-#5 yapılandırılmış doğrulama kanıtları
 ```
 
-## Docker Komutları
+## Ekip Arkadaşı İçin Hızlı Okuma ve Çalıştırma
 
-Tüm komutlar yerel kurulum yapılmadan `ml_proje/` içinde (veya proje kökünden `-f ml_proje/compose.yaml` ile) çalıştırılır:
+Depoyu yerel makineye çekip yerel Python paketi kurmadan doğrudan Docker ile çalıştırabilirsiniz:
 
 ```bash
+# 0. Depoyu klonla ve klasöre gir
+git clone https://github.com/abdurrahmansf18-max/makine-ogrenmesi-kestirimci-bakim.git
+cd makine-ogrenmesi-kestirimci-bakim
+
 # 1. Docker imajını oluştur
 docker compose build
 
-# 2. Tüm birim ve uçtan uca testleri çalıştır
+# 2. Tüm birim ve uçtan uca testleri çalıştır (12 passed)
 docker compose run --rm ml-app pytest -v
 
-# 3. 6 aşamalı eğitim, değerlendirme ve paketleme hattını çalıştır
+# 3. İsteğe bağlı: 6 aşamalı eğitim hattını yeniden çalıştır
 docker compose run --rm ml-app python -m src.run_pipeline
 
 # 4. Sade Streamlit web arayüzünü başlat (http://127.0.0.1:8501)
@@ -67,8 +72,9 @@ docker compose up -d ml-ui
 docker compose down
 ```
 
-## Mimari ve Doğrulama Dokümanları
+## Dokümanlar (Önerilen Okuma Sırası)
 
-- [C4 Mimari Diyagramları (C1–C4)](docs/mimari-c4.md)
-- [Aşama Bazlı Doğrulama Kanıtları (Issue #1–#5)](docs/dogrulama-kanitlari.md)
-- [Proje Değerlendirme Raporu (PDF)](docs/proje-degerlendirme-raporu.pdf)
+1. [Proje Değerlendirme Raporu (PDF)](docs/proje-degerlendirme-raporu.pdf) — Projenin kodlama öncesi nasıl tasarlandığı (konu, veri dengesizliği analizi, 4 algoritma ve mimari gerekçeleri)
+2. [Canlı Arayüz Sunum Rehberi (PDF)](docs/sunum-ve-arayuz-rehberi.pdf) — Maksimum 15 dakikalık sunum zaman planı, arayüz kullanım kuralları ve 1./2. Kişi anlatım akışı
+3. [C4 Mimari Diyagramları (C1–C4)](docs/mimari-c4.md) — Sistem, konteyner, bileşen ve kod seviyesi mimari şemaları
+4. [Aşama Bazlı Doğrulama Kanıtları (Issue #1–#5)](docs/dogrulama-kanitlari.md) — Tüm test çıktıları ve model metrik kanıtları
