@@ -1,0 +1,205 @@
+{
+  "dataset": {
+    "rows": 10000,
+    "train_rows": 8000,
+    "test_rows": 2000,
+    "test_size": 0.2,
+    "cv_folds": 5,
+    "random_state": 42,
+    "primary_metric": "f1",
+    "features": [
+      "Type",
+      "Air temperature [K]",
+      "Process temperature [K]",
+      "Rotational speed [rpm]",
+      "Torque [Nm]",
+      "Tool wear [min]"
+    ]
+  },
+  "champion_key": "hist_gradient_boosting",
+  "champion_selection_rule": "5-katli StratifiedKFold CV F1-Score ortalamasi en yuksek aday",
+  "models": [
+    {
+      "key": "dummy_baseline",
+      "display_name": "Dummy Baseline (Çoğunluk)",
+      "owner": "Ortak Referans",
+      "family": "Taban Çizgisi",
+      "scale_numeric": false,
+      "best_params": {},
+      "fit_seconds": 1.598,
+      "cv_train_f1_mean": 0.0,
+      "cv_f1_mean": 0.0,
+      "cv_f1_std": 0.0,
+      "test_metrics": {
+        "f1": 0.0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "specificity": 1.0,
+        "accuracy": 0.966,
+        "error_rate": 0.034,
+        "roc_auc": 0.5,
+        "pr_auc": 0.034,
+        "log_loss": 1.2255
+      },
+      "confusion_matrix": {
+        "tn": 1932,
+        "fp": 0,
+        "fn": 68,
+        "tp": 0
+      }
+    },
+    {
+      "key": "logistic_regression",
+      "display_name": "Lojistik Regresyon",
+      "owner": "1. Kişi",
+      "family": "Doğrusal / Olasılıksal",
+      "scale_numeric": true,
+      "best_params": {
+        "classifier__C": 10.0,
+        "classifier__class_weight": null
+      },
+      "fit_seconds": 1.531,
+      "cv_train_f1_mean": 0.3239,
+      "cv_f1_mean": 0.3304,
+      "cv_f1_std": 0.0546,
+      "test_metrics": {
+        "f1": 0.1975,
+        "recall": 0.1176,
+        "precision": 0.6154,
+        "specificity": 0.9974,
+        "accuracy": 0.9675,
+        "error_rate": 0.0325,
+        "roc_auc": 0.9,
+        "pr_auc": 0.4234,
+        "log_loss": 0.0975
+      },
+      "confusion_matrix": {
+        "tn": 1927,
+        "fp": 5,
+        "fn": 60,
+        "tp": 8
+      }
+    },
+    {
+      "key": "svc_rbf",
+      "display_name": "SVC (RBF Çekirdeği)",
+      "owner": "1. Kişi",
+      "family": "Çekirdek / Marjin",
+      "scale_numeric": true,
+      "best_params": {
+        "classifier__estimator__C": 30.0,
+        "classifier__estimator__class_weight": null,
+        "classifier__estimator__gamma": 0.2
+      },
+      "fit_seconds": 3.071,
+      "cv_train_f1_mean": 0.8246,
+      "cv_f1_mean": 0.6725,
+      "cv_f1_std": 0.0183,
+      "test_metrics": {
+        "f1": 0.6549,
+        "recall": 0.5441,
+        "precision": 0.8222,
+        "specificity": 0.9959,
+        "accuracy": 0.9805,
+        "error_rate": 0.0195,
+        "roc_auc": 0.9764,
+        "pr_auc": 0.7619,
+        "log_loss": 0.056
+      },
+      "confusion_matrix": {
+        "tn": 1924,
+        "fp": 8,
+        "fn": 31,
+        "tp": 37
+      }
+    },
+    {
+      "key": "hist_gradient_boosting",
+      "display_name": "HistGradientBoosting",
+      "owner": "2. Kişi",
+      "family": "Ağaç Topluluğu (Boosting)",
+      "scale_numeric": false,
+      "best_params": {
+        "classifier__class_weight": null,
+        "classifier__learning_rate": 0.1,
+        "classifier__max_iter": 150,
+        "classifier__max_leaf_nodes": 31
+      },
+      "fit_seconds": 1.395,
+      "cv_train_f1_mean": 0.9575,
+      "cv_f1_mean": 0.7428,
+      "cv_f1_std": 0.0639,
+      "test_metrics": {
+        "f1": 0.7869,
+        "recall": 0.7059,
+        "precision": 0.8889,
+        "specificity": 0.9969,
+        "accuracy": 0.987,
+        "error_rate": 0.013,
+        "roc_auc": 0.9653,
+        "pr_auc": 0.8415,
+        "log_loss": 0.0487
+      },
+      "confusion_matrix": {
+        "tn": 1926,
+        "fp": 6,
+        "fn": 20,
+        "tp": 48
+      }
+    },
+    {
+      "key": "mlp_classifier",
+      "display_name": "Yapay Sinir Ağı (MLP)",
+      "owner": "2. Kişi",
+      "family": "Yapay Sinir Ağı (YSA)",
+      "scale_numeric": true,
+      "best_params": {
+        "classifier__alpha": 0.01,
+        "classifier__hidden_layer_sizes": [
+          64,
+          32
+        ],
+        "classifier__learning_rate_init": 0.005
+      },
+      "fit_seconds": 4.454,
+      "cv_train_f1_mean": 0.7469,
+      "cv_f1_mean": 0.6656,
+      "cv_f1_std": 0.0594,
+      "test_metrics": {
+        "f1": 0.5946,
+        "recall": 0.4853,
+        "precision": 0.7674,
+        "specificity": 0.9948,
+        "accuracy": 0.9775,
+        "error_rate": 0.0225,
+        "roc_auc": 0.9683,
+        "pr_auc": 0.6969,
+        "log_loss": 0.0632
+      },
+      "confusion_matrix": {
+        "tn": 1922,
+        "fp": 10,
+        "fn": 35,
+        "tp": 33
+      }
+    }
+  ],
+  "demo_presets": {
+    "normal_sample": {
+      "Type": "L",
+      "Air temperature [K]": 300.5,
+      "Process temperature [K]": 309.8,
+      "Rotational speed [rpm]": 1345.0,
+      "Torque [Nm]": 62.7,
+      "Tool wear [min]": 153.0
+    },
+    "failure_sample": {
+      "Type": "L",
+      "Air temperature [K]": 303.7,
+      "Process temperature [K]": 312.1,
+      "Rotational speed [rpm]": 1363.0,
+      "Torque [Nm]": 51.8,
+      "Tool wear [min]": 90.0
+    }
+  }
+}
